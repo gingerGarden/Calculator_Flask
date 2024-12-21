@@ -1,2 +1,4 @@
-TEST_USERNAME = "test"
-TEST_PASSWORD = "1234"
+AUTHORIZED_USERS = {
+    "admin":"admin12#",
+    "user":"passwd"
+}
