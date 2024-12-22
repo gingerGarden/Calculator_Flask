@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .calculator {
+            width: 420px; /* 기존보다 약간 넓게 설정 */
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow: hidden;
+        }
+        .display {
+            width: 100%;
+            height: 150px;
+            font-size: 20px;
+            text-align: right;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .arrow-buttons {
+            display: grid;
+            grid-template-columns: auto auto auto; /* 버튼 간 균등 정렬 */
+            justify-content: center; /* 버튼 전체를 가운데 정렬 */
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .arrow-button {
+            height: 40px;
+            width: 50px; /* 버튼 크기 조정 */
+            font-size: 14px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 40px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            height: 50px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 50px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .button:active {
+            background-color: #388E3C;
+        }
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .display {
+                height: 60px; /* 디스플레이 크기 줄임 */
+                font-size: 18px;
+            }
+            .arrow-button {
+                height: 40px; /* 화살표 버튼 크기 조정 */
+                font-size: 14px;
+                line-height: 40px;
+            }
+            .button {
+                height: 50px; /* 숫자 버튼 크기 조정 */
+                font-size: 16px;
+                line-height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <!-- 입력/출력 디스플레이 -->
+        <input type="text" id="display" class="display" readonly />
+
+
+        <!-- 화살표 버튼들 -->
+        <div class="arrow-buttons">
+            <div></div> <!-- 빈 공간 -->
+            <button class="arrow-button" onclick="moveCursor('up')">▲</button>
+            <div></div> <!-- 빈 공간 -->
+            <button class="arrow-button" onclick="moveCursor('left')">◀</button>
+            <div></div>
+            <button class="arrow-button" onclick="moveCursor('right')">▶</button>
+            <div></div>
+            <button class="arrow-button" onclick="moveCursor('down')">▼</button>
+        </div>
+
+        <!-- 버튼들 -->
+        <div class="buttons">
+
+            <!-- 숫자 버튼 -->
+            <button class="button" onclick="appendValue('7')">7</button>
+            <button class="button" onclick="appendValue('8')">8</button>
+            <button class="button" onclick="appendValue('9')">9</button>
+            <button class="button" onclick="appendValue('/')">÷</button>
+
+            <button class="button" onclick="appendValue('4')">4</button>
+            <button class="button" onclick="appendValue('5')">5</button>
+            <button class="button" onclick="appendValue('6')">6</button>
+            <button class="button" onclick="appendValue('*')">×</button>
+
+            <button class="button" onclick="appendValue('1')">1</button>
+            <button class="button" onclick="appendValue('2')">2</button>
+            <button class="button" onclick="appendValue('3')">3</button>
+            <button class="button" onclick="appendValue('-')">−</button>
+
+            <button class="button" onclick="appendValue('0')">0</button>
+            <button class="button" onclick="appendValue('.')">.</button>
+            <button class="button" onclick="calculate()">=</button>
+            <button class="button" onclick="appendValue('+')">+</button>
+
+            <!-- 공학용 기능 버튼 -->
+            <button class="button" onclick="appendValue('sin(')">sin</button>
+            <button class="button" onclick="appendValue('cos(')">cos</button>
+            <button class="button" onclick="appendValue('tan(')">tan</button>
+            <button class="button" onclick="clearDisplay()">C</button>
+        </div>
+    </div>
+</body>
+</html>

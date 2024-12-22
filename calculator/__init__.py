@@ -1,6 +1,8 @@
 from flask import Flask, redirect, url_for
 import secrets
 
+from .routes import tools
+
 
 def create_app():
     app = Flask(__name__)
@@ -15,6 +17,7 @@ def create_app():
     from .routes import login, utils
     app.register_blueprint(login.bp)
     app.register_blueprint(utils.bp)
+    app.register_blueprint(tools.bp)
     
     # 시작 시, log in 페이지로 리디렉션
     @app.route('/')

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tools</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .logout-button:hover {
+            background-color: #45a049;
+        }
+        .container-wrapper {
+            display: flex;
+            justify-content: center;    /* 버튼을 가로로 중앙 정렬 */
+            align-items: center;
+            gap: 30px;                  /* 버튼 사이 간격 */
+        }
+        .button-container {
+            width: 170px;
+            height: 200px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .button-container:hover {
+            background-color: #f9f9f9;
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+        .button-container:active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .container-wrapper {
+                flex-direction: column;  /* 작은 화면에서 세로 정렬 */
+            }
+            .button-container {
+                width: 80%;              /* 화면 너비의 80% */
+                height: auto;            /* 높이는 자동으로 */
+                padding: 15px;           /* 여백 추가 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logout 버튼 -->
+    <form action="{{ url_for('tools.logout') }}" method="get">
+        <button class="logout-button">Logout</button>
+    </form>
+
+    <!-- 중앙 버튼 컨테이너 -->
+    <div class="container-wrapper">
+        <!-- 각 버튼이 개별적으로 동작하도록 form 태그 분리 -->
+        <form action="{{ url_for('tools.handle_action') }}" method="post">
+            <button class="button-container" name="button_id" value="button1" type="submit">
+                Calculator<br>Mobile
+            </button>
+        </form>
+        <form action="{{ url_for('tools.handle_action') }}" method="post">
+            <button class="button-container" name="button_id" value="button2" type="submit">
+                Calculator<br>PC
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>
