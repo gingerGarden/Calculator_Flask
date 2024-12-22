@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Fail</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .login-fail-container {
+            text-align: center;
+            background-color: #ffffff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-fail-container h1 {
+            margin-bottom: 30px;
+        }
+        .login-fail-container button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-fail-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-fail-container">
+        <h1>Login Fail!</h1>
+        <p>Check your ID and Password</p>
+
+        <!-- 버튼 클릭 시 Flask에서 전달한 URL로 이동-->
+        <form action="{{login_url}}" method="get">
+            <button type="submit">Return to Login Page</button>
+        </form>
+    </div>
+</body>
+</html>
+    
+        

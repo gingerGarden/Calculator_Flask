@@ -1,4 +1,5 @@
 AUTHORIZED_USERS = {
-    "admin":"admin12#",
-    "user":"passwd"
+    "admin":"admin",
+    "user1":"passwd1",
+    "user2":"passwd2"
 }

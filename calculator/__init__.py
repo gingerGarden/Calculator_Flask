@@ -1,4 +1,5 @@
 from flask import Flask, redirect, url_for
+import secrets
 
 
 def create_app():
@@ -7,6 +8,10 @@ def create_app():
     # config 파일 로드
     app.config.from_pyfile('config.py')     # 'config.py' 파일을 읽어온다
     
+    # 세션을 위한 Secret Key 설정
+    app.secret_key = secrets.token_hex(32)
+    
+    # 블루프린트 등록
     from .routes import login, utils
     app.register_blueprint(login.bp)
     app.register_blueprint(utils.bp)

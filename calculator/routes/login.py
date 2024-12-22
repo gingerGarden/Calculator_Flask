@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, current_app, redirect, url_for
+from flask import Blueprint, render_template, request, current_app, redirect, url_for, session
 
 bp = Blueprint(
     name='login',               # 블루프린트의 "별칭"
@@ -27,16 +27,26 @@ def login():
             
         # 이동
         if mask:
+            session['user_id'] = user_id    # 세션에 사용자 ID 저장
             return redirect(url_for('login.success'))
         else:
             return redirect(url_for('login.fail'))
         
     return render_template('login_page.html')
 
-@bp.route('/fail')
-def fail():
-    return "Fail"
-
 @bp.route('/success')
 def success():
-    return "Success"
+    if 'user_id' not in session:
+        return redirect(url_for('login.login'))
+    return f"Success: Welcome, {session['user_id']}"
+
+@bp.route('/fail')
+def fail():
+    # login 페이지의 url
+    login_url = url_for('login.login')
+    return render_template('login_fail.html', login_url=login_url)
+
+@bp.route('/logout')
+def logout():
+    session.pop('user_id', None)    # 세션에서 사용자 ID 제거
+    return redirect(url_for('login.login'))
