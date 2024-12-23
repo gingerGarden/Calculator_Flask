@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         body {
             margin: 0;
@@ -14,8 +15,9 @@
             height: 100vh;
             position: relative;
         }
+        /* 전체 계산기 */
         .calculator {
-            width: 420px; /* 기존보다 약간 넓게 설정 */
+            width: 420px; /* 계산기 너비 */
             padding: 20px;
             border-radius: 10px;
             background-color: white;
@@ -23,8 +25,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            overflow: hidden;
         }
+        /* 디스플레이 */
         .display {
             width: 100%;
             height: 150px;
@@ -36,31 +38,109 @@
             box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
         }
+
+        /* 컨테이너 */
+        .top-containers {
+            display: flex; /* 수평 정렬 */
+            justify-content: space-between; /* 왼쪽과 오른쪽으로 밀착 정렬 */
+            gap: 0px; /* 컨테이너 간 간격 */
+        }
+        .arrow-container {
+            float: right;
+            width: 34%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            margin-bottom: 19px; /* 아래쪽 여백 추가 */
+        }
+        .func1-container {
+            float: left;
+            width: 52%; /* 크기를 더 크게 설정 */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            display: grid; /* Grid 레이아웃 */
+            grid-template-columns: repeat(4, 1fr); /* 4열로 설정 */
+            gap: 10px; /* 버튼 간 간격 */
+            margin: 0; /* 추가적인 외부 여백 제거 */
+        }
+        .func2-container {
+            float: right;
+            width: 34%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px; /* 버튼 간 간격 */
+        }
+        .basic-container {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        /* 버튼 */
         .arrow-buttons {
             display: grid;
-            grid-template-columns: auto auto auto; /* 버튼 간 균등 정렬 */
-            justify-content: center; /* 버튼 전체를 가운데 정렬 */
-            gap: 10px;
-            margin-bottom: 10px;
+            grid-template-columns: repeat(3, 1fr);
+            justify-content: space-between;
+            gap: 2px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
         .arrow-button {
-            height: 40px;
-            width: 50px; /* 버튼 크기 조정 */
+            width: 100%;        /* 버튼 너비를 셀 너비에 맞춤 */
+            height: auto;       /* 높이를 비율에 따라 설정 */
             font-size: 14px;
-            background-color: #2196F3;
+            background-color: rgb(118, 140, 240);
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
             line-height: 40px;
+            margin: -10px 0;
         }
-        .buttons {
+        .arrow-button:hover {
+            background-color:rgb(100, 122, 221);
+        }
+        .arrow-button:active {
+            background-color:rgb(109, 122, 240);
+        }
+        .func-button {
+            width: 100%;
+            max-width: 100%; /* 부모 컨테이너의 너비를 초과하지 않음 */
+            height: 50px; /* 버튼 높이 */
+            font-size: calc(30px * 0.40); /* 높이의 40%로 텍스트 크기 설정 */
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px; /* 버튼 높이에 맞춤 */
+        }
+        .func-button:hover {
+            background-color: #1976D2;
+        }
+        .func-button:active {
+            background-color: #0D47A1;
+        }
+        .basic-buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
         }
-        .button {
+        .basic-button {
             height: 50px;
             font-size: 18px;
             background-color: #4CAF50;
@@ -71,12 +151,13 @@
             text-align: center;
             line-height: 50px;
         }
-        .button:hover {
+        .basic-button:hover {
             background-color: #45a049;
         }
-        .button:active {
+        .basic-button:active {
             background-color: #388E3C;
         }
+
         /* 반응형 디자인 */
         @media (max-width: 768px) {
             .display {
@@ -88,10 +169,14 @@
                 font-size: 14px;
                 line-height: 40px;
             }
-            .button {
+            .basic-button {
                 height: 50px; /* 숫자 버튼 크기 조정 */
                 font-size: 16px;
                 line-height: 50px;
+            }
+            .func-button {
+                height: 40px;
+                font-size: calc(40px * 0.4);
             }
         }
     </style>
@@ -102,47 +187,86 @@
         <input type="text" id="display" class="display" readonly />
 
 
-        <!-- 화살표 버튼들 -->
-        <div class="arrow-buttons">
-            <div></div> <!-- 빈 공간 -->
-            <button class="arrow-button" onclick="moveCursor('up')">▲</button>
-            <div></div> <!-- 빈 공간 -->
-            <button class="arrow-button" onclick="moveCursor('left')">◀</button>
-            <div></div>
-            <button class="arrow-button" onclick="moveCursor('right')">▶</button>
-            <div></div>
-            <button class="arrow-button" onclick="moveCursor('down')">▼</button>
+        <!-- 화살표 버튼 영역 -->
+        <div class="top-container"> 
+            <div class="arrow-container">
+                <div class="arrow-buttons">
+                    <div></div>
+                    <button class="arrow-button" onclick="moveCursor('up')">▲</button>
+                    <div></div>
+                    <button class="arrow-button" onclick="moveCursor('left')">◀</button>
+                    <div></div>
+                    <button class="arrow-button" onclick="moveCursor('right')">▶</button>
+                    <div></div>
+                    <button class="arrow-button" onclick="moveCursor('down')">▼</button>
+                </div>
+            </div>
+            <!-- 함수 컨테이너 1 -->
+            <div class="func1-container">
+                <button class="func-button" value="a2">a<sup>2</sup></button>
+                <button class="func-button" value="ab">a<sup>b</sup></button>
+                <button class="func-button" value="sqrt">$$\sqrt{x}$$</button>
+                <button class="func-button" value="sqrtn">$$\sqrt[n]{x}$$</button>
+                <button class="func-button" value="a/b">$$\frac{a}{b}$$</button>
+                <button class="func-button" value="a+b/c">$$a\frac{b}{c}$$</button>
+                <button class="func-button" value="|a|">|a|</button>
+                <button class="func-button" value="round">round</button>
+                <button class="func-button" value="ln">ln</button>
+                <button class="func-button" value="log">log</button>
+                <button class="func-button" value="log_ab">$$\log_{a}{b}$$</button>
+                <button class="func-button" value="e">e</button>
+                <button class="func-button" value="P">$$_{n}P_{r}$$</button>
+                <button class="func-button" value="C">$$_{n}C_{r}$$</button>
+                <button class="func-button" value="!">!</button>
+                <button class="func-button" value="π">π</button>
+                <button class="func-button" value="int">&int;</button>
+                <button class="func-button" value="diff">$$\frac{d}{dx}$$</button>
+                <button class="func-button" value="(">(</button>
+                <button class="func-button" value=")">)</button>
+            </div>
+            <!-- 함수 컨테이너 2 -->
+            <div class="func2-container">
+                <button class="func-button" value="sin">sin</button>
+                <button class="func-button" value="cos">cos</button>
+                <button class="func-button" value="tan">tan</button>
+                <button class="func-button" value="arcsin">sin<sup>-1</sup></button>
+                <button class="func-button" value="arccos">cos<sup>-1</sup></button>
+                <button class="func-button" value="arctan">tan<sup>-1</sup></button>
+                <button class="func-button" value="sinh">sinh</button>
+                <button class="func-button" value="cosh">cosh</button>
+                <button class="func-button" value="tanh">tanh</button>
+            </div>
         </div>
 
-        <!-- 버튼들 -->
-        <div class="buttons">
+        <!-- 기본 버튼 영역 -->
+        <div class="basic-container">
+            <div class="basic-buttons">
 
-            <!-- 숫자 버튼 -->
-            <button class="button" onclick="appendValue('7')">7</button>
-            <button class="button" onclick="appendValue('8')">8</button>
-            <button class="button" onclick="appendValue('9')">9</button>
-            <button class="button" onclick="appendValue('/')">÷</button>
+                <!-- 숫자 버튼 -->
+                <button class="basic-button" value="7">7</button>
+                <button class="basic-button" value="8">8</button>
+                <button class="basic-button" value="9">9</button>
+                <button class="basic-button" onclick="del">del</button>
+                <button class="basic-button" onclick="AC">AC</button>
 
-            <button class="button" onclick="appendValue('4')">4</button>
-            <button class="button" onclick="appendValue('5')">5</button>
-            <button class="button" onclick="appendValue('6')">6</button>
-            <button class="button" onclick="appendValue('*')">×</button>
+                <button class="basic-button" value="4">4</button>
+                <button class="basic-button" value="5">5</button>
+                <button class="basic-button" value="6">6</button>
+                <button class="basic-button" onclick="*">×</button>
+                <button class="basic-button" onclick="/">÷</button>
 
-            <button class="button" onclick="appendValue('1')">1</button>
-            <button class="button" onclick="appendValue('2')">2</button>
-            <button class="button" onclick="appendValue('3')">3</button>
-            <button class="button" onclick="appendValue('-')">−</button>
+                <button class="basic-button" value="1">1</button>
+                <button class="basic-button" value="2">2</button>
+                <button class="basic-button" value="3">3</button>
+                <button class="basic-button" value="+">+</button>
+                <button class="basic-button" value="-">−</button>
 
-            <button class="button" onclick="appendValue('0')">0</button>
-            <button class="button" onclick="appendValue('.')">.</button>
-            <button class="button" onclick="calculate()">=</button>
-            <button class="button" onclick="appendValue('+')">+</button>
-
-            <!-- 공학용 기능 버튼 -->
-            <button class="button" onclick="appendValue('sin(')">sin</button>
-            <button class="button" onclick="appendValue('cos(')">cos</button>
-            <button class="button" onclick="appendValue('tan(')">tan</button>
-            <button class="button" onclick="clearDisplay()">C</button>
+                <button class="basic-button" value="0">0</button>
+                <button class="basic-button" value=".">.</button>
+                <button class="basic-button" value="%">%</button>
+                <button class="basic-button" value="Ans">Ans</button>
+                <button class="basic-button" value="=">=</button>
+            </div>
         </div>
     </div>
 </body>
