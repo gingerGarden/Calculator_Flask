@@ -5,26 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <!-- CSS 파일 연결 -->
-    <link rel="stylesheet" href="/static/calculator_mobile_style.css">
+    <link rel="stylesheet" href="/static/calculator_mobile/style.css">
     
 </head>
 <body>
     <div class="calculator">
         <!-- 입력/출력 디스플레이 -->
-        <input type="text" id="display" class="display" readonly />
+        <textarea type="text" id="display" class="display" readonly></textarea>
 
         <!-- 화살표 버튼 영역 -->
         <div class="top-container"> 
             <div class="arrow-container">
                 <div class="arrow-buttons">
                     <div></div>
-                    <button class="arrow-button" value="up" aria-label="up button">▲</button>
+                    <button class="arrow-button" id="up" aria-label="up button">▲</button>
                     <div></div>
-                    <button class="arrow-button" value="left" aria-label="left button">◀</button>
+                    <button class="arrow-button" id="left" aria-label="left button">◀</button>
                     <div></div>
-                    <button class="arrow-button" value="right" aria-label="right button">▶</button>
+                    <button class="arrow-button" id="right" aria-label="right button">▶</button>
                     <div></div>
-                    <button class="arrow-button" value="down" aria-label="down button">▼</button>
+                    <button class="arrow-button" id="down" aria-label="down button">▼</button>
                 </div>
             </div>
 
@@ -129,16 +129,16 @@
                 <div class="extra-buttons">
 
                     <!-- 특수 숫자 버튼 -->
-                    <button class="extra-button" value="pi" aria-label="Pi constant">
+                    <button class="extra-button" id="pi" value="π" aria-label="Pi constant">
                         <span class="latex">π</span>
                     </button>
-                    <button class="extra-button" value="euler" aria-label="Euler's number">
+                    <button class="extra-button" id="euler" value="e" aria-label="Euler's number">
                         <span class="latex">e</span>
                     </button>
-                    <button class="extra-button" value="phi" aria-label="Golden ratio">
+                    <button class="extra-button" id="phi" value="ϕ" aria-label="Golden ratio">
                         <span class="latex">ϕ</span>
                     </button>
-                    <button class="extra-button" value="gamma-const" aria-label="Euler-Mascheroni constant">
+                    <button class="extra-button" id="gamma-const" value="γ" aria-label="Euler-Mascheroni constant">
                         <span class="latex">γ</span>
                     </button>
                 </div>
@@ -147,32 +147,34 @@
                 <div class="basic-buttons">
 
                     <!-- 숫자 버튼 -->
-                    <button class="basic-button" value="7" aria-label="Number 7">7</button>
-                    <button class="basic-button" value="8" aria-label="Number 8">8</button>
-                    <button class="basic-button" value="9" aria-label="Number 9">9</button>
-                    <button class="basic-button" value="del" aria-label="Delete last digit">del</button>
-                    <button class="basic-button" value="AC" aria-label="Clear all input">AC</button>
+                    <button class="number-button" value="7" aria-label="Number 7">7</button>
+                    <button class="number-button" value="8" aria-label="Number 8">8</button>
+                    <button class="number-button" value="9" aria-label="Number 9">9</button>
+                    <button class="basic-button" id="del" aria-label="Delete last digit">del</button>
+                    <button class="basic-button" id="AC" aria-label="Clear all input">AC</button>
                     
-                    <button class="basic-button" value="4" aria-label="Number 4">4</button>
-                    <button class="basic-button" value="5" aria-label="Number 5">5</button>
-                    <button class="basic-button" value="6" aria-label="Number 6">6</button>
-                    <button class="basic-button" value="multiply" aria-label="Multiply">×</button>
-                    <button class="basic-button" value="divide" aria-label="Divide">÷</button>
+                    <button class="number-button" value="4" aria-label="Number 4">4</button>
+                    <button class="number-button" value="5" aria-label="Number 5">5</button>
+                    <button class="number-button" value="6" aria-label="Number 6">6</button>
+                    <button class="basic-button" id="multiply" value=" x " aria-label="Multiply">×</button>
+                    <button class="basic-button" iid="divide" value=" ÷ " aria-label="Divide">÷</button>
                     
-                    <button class="basic-button" value="1" aria-label="Number 1">1</button>
-                    <button class="basic-button" value="2" aria-label="Number 2">2</button>
-                    <button class="basic-button" value="3" aria-label="Number 3">3</button>
-                    <button class="basic-button" value="add" aria-label="Addition">+</button>
-                    <button class="basic-button" value="subtract" aria-label="Subtraction">−</button>
+                    <button class="number-button" value="1" aria-label="Number 1">1</button>
+                    <button class="number-button" value="2" aria-label="Number 2">2</button>
+                    <button class="number-button" value="3" aria-label="Number 3">3</button>
+                    <button class="basic-button" id="add" value=" + " aria-label="Addition">+</button>
+                    <button class="basic-button" id="subtract" value=" - " aria-label="Subtraction">−</button>
                     
-                    <button class="basic-button" value="0" aria-label="Number 0">0</button>
-                    <button class="basic-button" value="dot" aria-label="Decimal point">.</button>
-                    <button class="basic-button" value="percent" aria-label="Percentage">%</button>
-                    <button class="basic-button" value="ans" aria-label="Previous answer">Ans</button>
-                    <button class="basic-button" value="equals" aria-label="Equals">=</button>
+                    <button class="number-button" value="0" aria-label="Number 0">0</button>
+                    <button class="basic-button" id="dot" value="." aria-label="Decimal point">.</button>
+                    <button class="basic-button" id="percent" aria-label="Percentage">%</button>
+                    <button class="basic-button" id="ans" aria-label="Previous answer">Ans</button>
+                    <button class="basic-button" id="calculate" aria-label="Equals">=</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- JS 파일 연결 -->
+    <script src="/static/calculator_mobile/script_basic.js"></script>
 </body>
 </html>
