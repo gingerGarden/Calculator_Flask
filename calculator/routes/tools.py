@@ -31,7 +31,7 @@ def handle_action():
 
 @bp.route('/calculator-mobile')
 def calculator_mobile():
-    return render_template('tools_calculator.html')
+    return render_template('calculator_mobile.html')
 
 @bp.route('/calculator-pc')
 def calculator_pc():

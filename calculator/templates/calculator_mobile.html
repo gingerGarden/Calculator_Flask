@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="/static/calculator_mobile_style.css">
+    
+</head>
+<body>
+    <div class="calculator">
+        <!-- 입력/출력 디스플레이 -->
+        <input type="text" id="display" class="display" readonly />
+
+        <!-- 화살표 버튼 영역 -->
+        <div class="top-container"> 
+            <div class="arrow-container">
+                <div class="arrow-buttons">
+                    <div></div>
+                    <button class="arrow-button" value="up" aria-label="up button">▲</button>
+                    <div></div>
+                    <button class="arrow-button" value="left" aria-label="left button">◀</button>
+                    <div></div>
+                    <button class="arrow-button" value="right" aria-label="right button">▶</button>
+                    <div></div>
+                    <button class="arrow-button" value="down" aria-label="down button">▼</button>
+                </div>
+            </div>
+
+            <!-- 함수 컨테이너 1 -->
+            <div class="func1-container">
+                <button class="func-button" value="square" aria-label="Square">
+                    a<sup class="small-exponent">2</sup>
+                </button>
+                <button class="func-button" value="power" aria-label="Exponentiation">
+                    a<sup class="small-exponent">b</sup>
+                </button>
+                <button class="func-button" value="sqrt" aria-label="Square root">
+                    <span class="latex">&#8730;x</span>
+                </button>
+                <button class="func-button" value="nth-root" aria-label="Nth root">
+                    <span class="latex"><sup>n</sup>&#8730;x</span>
+                </button>
+
+                <button class="func-button" value="ln" aria-label="Natural logarithm">
+                    <span class="latex">ln</span>
+                </button>
+                <button class="func-button" value="exp" aria-label="Exponential function">
+                    <span class="latex">e<sup class="small-exponent">x</sup></span>
+                </button>
+                <button class="func-button" value="log10" aria-label="Logarithm base 10">
+                    <span class="latex">log</span>
+                </button>
+                <button class="func-button" value="log-ab" aria-label="Logarithm with base a">
+                    <span class="latex">log&#8336;b</span>
+                </button>
+                <button class="func-button" value="fraction" aria-label="Fraction">
+                    a/b
+                </button>
+                <button class="func-button" value="abs" aria-label="Absolute value">
+                    |a|
+                </button>
+                <button class="func-button" value="complex-abs" aria-label="Complex absolute value">
+                    |z|
+                </button>
+                <button class="func-button" value="i" aria-label="Imaginary unit">
+                    <span class="latex">i</span>
+                </button>
+
+                <button class="func-button" value="perm" aria-label="Permutation">
+                    <span class="latex"><sub>n</sub>P<sub>r</sub></span>
+                </button>
+                <button class="func-button" value="comb" aria-label="Combination">
+                    <span class="latex"><sub>n</sub>C<sub>r</sub></span>
+                </button>
+                <button class="func-button" value="factorial" aria-label="Factorial">!</button>
+                <button class="func-button" value="gamma" aria-label="Gamma function">
+                    <span class="latex">Γ(x)</span>
+                </button>
+
+                <button class="func-button" value="integral" aria-label="Integral">
+                    <span class="latex">&int;</span>
+                </button>
+                <button class="func-button" value="diff" aria-label="Derivative">
+                    <span class="latex">d/dx</span>
+                </button>
+                <button class="func-button" value="open-paren" aria-label="Open parenthesis">(</button>
+                <button class="func-button" value="close-paren" aria-label="Close parenthesis">)</button>
+            </div>
+
+            <!-- 함수 컨테이너 2 -->
+            <div class="func2-container">
+                <button class="func-button" value="sin" aria-label="Sine function">
+                    <span class="latex">sin</span>
+                </button>
+                <button class="func-button" value="cos" aria-label="Cosine function">
+                    <span class="latex">cos</span>
+                </button>
+                <button class="func-button" value="tan" aria-label="Tangent function">
+                    <span class="latex">tan</span>
+                </button>
+
+                <button class="func-button" value="arcsin" aria-label="Inverse sine function">
+                    <span class="latex">sin</span><sup class="small-exponent">-1</sup>
+                </button>
+                <button class="func-button" value="arccos" aria-label="Inverse cosine function">
+                    <span class="latex">cos</span><sup class="small-exponent">-1</sup>
+                </button>
+                <button class="func-button" value="arctan" aria-label="Inverse tangent function">
+                    <span class="latex">tan</span><sup class="small-exponent">-1</sup>
+                </button>
+
+                <button class="func-button" value="sinh" aria-label="Hyperbolic sine function">
+                    <span class="latex">sinh</span>
+                </button>
+                <button class="func-button" value="cosh" aria-label="Hyperbolic cosine function">
+                    <span class="latex">cosh</span>
+                </button>
+                <button class="func-button" value="tanh" aria-label="Hyperbolic tangent function">
+                    <span class="latex">tanh</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 기본 버튼 영역 -->
+        <div class="bottom-container"> 
+            <div class="extra-container">
+                <div class="extra-buttons">
+
+                    <!-- 특수 숫자 버튼 -->
+                    <button class="extra-button" value="pi" aria-label="Pi constant">
+                        <span class="latex">π</span>
+                    </button>
+                    <button class="extra-button" value="euler" aria-label="Euler's number">
+                        <span class="latex">e</span>
+                    </button>
+                    <button class="extra-button" value="phi" aria-label="Golden ratio">
+                        <span class="latex">ϕ</span>
+                    </button>
+                    <button class="extra-button" value="gamma-const" aria-label="Euler-Mascheroni constant">
+                        <span class="latex">γ</span>
+                    </button>
+                </div>
+            </div>
+            <div class="basic-container">
+                <div class="basic-buttons">
+
+                    <!-- 숫자 버튼 -->
+                    <button class="basic-button" value="7" aria-label="Number 7">7</button>
+                    <button class="basic-button" value="8" aria-label="Number 8">8</button>
+                    <button class="basic-button" value="9" aria-label="Number 9">9</button>
+                    <button class="basic-button" value="del" aria-label="Delete last digit">del</button>
+                    <button class="basic-button" value="AC" aria-label="Clear all input">AC</button>
+                    
+                    <button class="basic-button" value="4" aria-label="Number 4">4</button>
+                    <button class="basic-button" value="5" aria-label="Number 5">5</button>
+                    <button class="basic-button" value="6" aria-label="Number 6">6</button>
+                    <button class="basic-button" value="multiply" aria-label="Multiply">×</button>
+                    <button class="basic-button" value="divide" aria-label="Divide">÷</button>
+                    
+                    <button class="basic-button" value="1" aria-label="Number 1">1</button>
+                    <button class="basic-button" value="2" aria-label="Number 2">2</button>
+                    <button class="basic-button" value="3" aria-label="Number 3">3</button>
+                    <button class="basic-button" value="add" aria-label="Addition">+</button>
+                    <button class="basic-button" value="subtract" aria-label="Subtraction">−</button>
+                    
+                    <button class="basic-button" value="0" aria-label="Number 0">0</button>
+                    <button class="basic-button" value="dot" aria-label="Decimal point">.</button>
+                    <button class="basic-button" value="percent" aria-label="Percentage">%</button>
+                    <button class="basic-button" value="ans" aria-label="Previous answer">Ans</button>
+                    <button class="basic-button" value="equals" aria-label="Equals">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
