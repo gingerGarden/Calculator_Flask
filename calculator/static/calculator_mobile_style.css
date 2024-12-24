@@ -9,6 +9,7 @@ body {
     position: relative;
 }
 
+
 /* 전체 계산기 */
 .calculator {
     width: 420px; /* 계산기 너비 */
@@ -20,6 +21,7 @@ body {
     flex-direction: column;
     gap: 20px;
 }
+
 
 /* 디스플레이 */
 .display {
@@ -33,6 +35,7 @@ body {
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
 }
+
 
 /* 컨테이너 */
 .top-containers {
@@ -192,6 +195,8 @@ body {
     background-color: #388E3C;
 }
 
+
+/* 문자 스타일 - 이태릭체*/
 .latex {
     font-family: 'Times New Roman', serif; /* LaTeX 스타일 글꼴 */
     font-style: italic;   
@@ -200,6 +205,7 @@ body {
     font-size: 0.6em;      /* 글자 크기를 작게 설정 */
     vertical-align: super; /* 위첨자 위치 조정 */
 }
+
 
 /* 반응형 디자인 */
 @media (max-width: 480px) {
